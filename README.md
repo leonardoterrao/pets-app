@@ -28,3 +28,11 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 You can then execute your native executable with: `./target/pets-app-1.0.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/building-native-image.
+
+
+
+```
+    java -XX:+UseAppCDS -XX:DumpLoadedClassList=classes.lst -jar target/pets-app-1.0.0-SNAPSHOT-runner.jar & sleep 5 && exit
+    java -Xshare:dump -XX:+UseAppCDS -XX:SharedClassListFile=classes.lst -XX:SharedArchiveFile=app-cds.jsa --class-path target/pets-app-1.0.0-SNAPSHOT-runner.jar
+    java -Xshare:on -XX:SharedArchiveFile=app-cds.jsa -jar "target/pets-app-1.0.0-SNAPSHOT-runner.jar"
+```
